@@ -8,23 +8,27 @@
   min-height: 1rem;
   margin: 0;
   padding: 0;
+  flex-grow: 1;
 }
 
 .colors {
 
 }
 
-.row {
+.row,
+.col {
   display: flex;
-  flex-direction: row;
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: stretch;
   align-content: stretch;
 }
 
+.row {
+  flex-direction: row;
+}
+
 .col {
-  display: block;
-  flex: 1 1 auto;
-  align-self: auto;
+  flex-grow: 1;
+  flex-direction: column;
 }

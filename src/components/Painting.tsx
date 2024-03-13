@@ -1,7 +1,9 @@
 
+const size = 30
+const gapSize = 0.25
+
 export default function Painting({ paintingCells }: { paintingCells: any }) {
 
-  const size = 30
   const c = (id: number) => paintingCells[id].color
 
   return (
@@ -15,13 +17,13 @@ export default function Painting({ paintingCells }: { paintingCells: any }) {
           </Row>
           <Row h={90}>
             <Col w={10}>
-              <Cell color={c(3)} h={30}/>
-              <Cell color={c(4)} h={40}/>
+              <Cell color={c(3)} h={25}/>
+              <Cell color={c(4)} h={45}/>
               <Cell color={c(5)} h={30}/>
             </Col>
             <Col w={90}>
               <Row h={60}>
-                <Cell color={c(6)} h={100} w={65}/>
+                <Cell color={c(6)} h={100} w={41.5}/>
                 <Col>
                   <Cell color={c(7)} h={50}/>
                   <Row h={50}>
@@ -37,12 +39,12 @@ export default function Painting({ paintingCells }: { paintingCells: any }) {
                 </Col>
                 <Col w={70}>
                   <Row h={90}>
-                    <Col>
+                    <Col w={52.5}>
                       <Cell color={c(12)} h={40}/>
                       <Cell color={c(13)} h={40}/>
                       <Cell color={c(14)} h={20}/>
                     </Col>
-                    <Col>
+                    <Col w={47.5}>
                       <Cell color={c(15)} h={40}/>
                       <Cell color={c(16)} h={60}/>
                     </Col>
@@ -53,14 +55,13 @@ export default function Painting({ paintingCells }: { paintingCells: any }) {
             </Col>
           </Row>
         </Col>
-        <Col w={10} h={100}>
-          <Cell color={c(18)} h={75} />
-          <Cell color={c(19)} h={25} />
+        <Col w={10}>
+          <Cell color={c(18)} />
+          <Cell color={c(19)} h={30} />
         </Col>
       </Row>
     </div>
   )
-
 }
 
 function Row({ children, w, h }: { children: any, w?: number, h?: number }) {
@@ -83,8 +84,9 @@ function Cell({ color, h, w, className = '' }: { color: string, h?: number, w?:n
   return (
     <div className={`cell ${className}`} style={{
       backgroundColor: color,
-      width: `${w}%`,
-      height: `${h}%`
+      width: w ? `${w}%` : '100%',
+      height: h ? `${h}%` : '100%',
+      outline: `${gapSize}rem solid black`,
     }} />
   )
 }
