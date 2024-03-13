@@ -13,14 +13,22 @@ export default function App() {
   const [paintingCells, set_paintingCells] = useState(defaultPaintingCells)
   const [selectedColor, set_selectedColor] = useState('')
 
-  const paintCell = (cellId, newColor) => {
-    set_paintingCells((prev) => prev.map((cell) => cell.id === cellId ? { ...cell, color: newColor } : cell))
+  const resetColors = () => {
+    set_paintingCells(defaultPaintingCells)
+  }
+
+  const paintCell = (cellId) => {
+    if(selectedColor === '') {
+      return;
+    }
+    set_paintingCells((prev) => prev.map((cell) => cell.id === cellId ? { ...cell, color: selectedColor } : cell))
   }
 
   return (
-    <div>
-      <Painting {...{ paintingCells }}/>
+    <div className='App'>
       <Colors {...{ selectedColor, set_selectedColor }}/>
+      <Painting {...{ paintingCells, onClick: paintCell }}/>
+      <button onClick={resetColors}>Reset Colors</button>
     </div>
   )
 }
