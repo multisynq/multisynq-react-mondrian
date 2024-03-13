@@ -27,9 +27,8 @@ export default function App() {
 
   return (
     <div className='App'>
-      <Colors {...{ selectedColor, set_selectedColor }}/>
+      <Colors {...{ selectedColor, set_selectedColor, resetPainting }}/>
       <Painting {...{ paintingCells, onClick: paintCell }}/>
-      <button onClick={resetPainting}>Reset Colors</button>
     </div>
   )
 }
