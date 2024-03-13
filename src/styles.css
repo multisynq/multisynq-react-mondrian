@@ -1,0 +1,30 @@
+.painting {
+
+}
+
+.cell {
+  width: 100%;
+  min-width: 1rem;
+  min-height: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+.colors {
+
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.col {
+  display: block;
+  flex: 1 1 auto;
+  align-self: auto;
+}
