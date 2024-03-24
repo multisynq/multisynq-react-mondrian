@@ -1,11 +1,21 @@
 
+type PaintingProps = {
+  paintingCells: any,
+  onClick: (cellId: number) => void
+}
 
-export default function Painting({ paintingCells, onClick }: { paintingCells: any, onClick: (cellId: number) => void }) {
+type CellProps = {
+  id: number,
+  h?: number,
+  w?: number,
+  className?: string
+}
+export default function Painting({ paintingCells, onClick }: PaintingProps) {
   
   const gapSize = 0.25
   const size = `calc(100vw - (${gapSize}rem * 2))`
 
-  function Cell({ id, h, w, className = '' }: { id: number, h?: number, w?: number, className?: string }) {
+  function Cell({ id, h, w, className = '' }: CellProps) {
     return (
       <div {...{
         id: `cell-${id}`,
