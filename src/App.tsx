@@ -1,34 +1,27 @@
-import './styles.css'
+import "./styles.css";
 
-import { useState } from 'react'
-import { useModelRoot, usePublish, useSubscribe } from '@croquet/react'
+import { useState } from "react";
 
-import PaintingModel from './models/painting'
-import Colors from './components/Colors'
-import Painting from './components/Painting'
+import { usePaintingModel } from "./models/painting";
+import Colors from "./components/Colors";
+import Painting from "./components/Painting";
 
 export default function App() {
-  const model: PaintingModel = useModelRoot() as PaintingModel
 
-  const [paintingCells, set_paintingCells] = useState(model.cells)
-  const [selectedColor, set_selectedColor] = useState(null)
+  const { paintingCells, paintCell, resetPainting } = usePaintingModel();
 
-  useSubscribe(model.id, 'cellPainted',   () => set_paintingCells(model.cells))
-  useSubscribe(model.id, 'paintingReset', () => set_paintingCells(model.cells))
+  const [selectedColor, set_selectedColor] = useState(null);
 
-  const publishPaint  = usePublish((data) => [model.id, 'paint', data])
-  const resetPainting = usePublish((    ) => [model.id, 'reset'      ])
-
-  const paintCell = (cellId) => {
-    if(selectedColor === null) return
-    const payload = { cellId, newColor: selectedColor }
-    publishPaint(payload)
-  }
+  const handleCellClick = (cellId) => {
+    if (selectedColor === null) return;
+    const payload = { cellId, newColor: selectedColor };
+    paintCell(payload);
+  };
 
   return (
-    <div className='App'>
-      <Colors {...{ selectedColor, set_selectedColor, resetPainting }}/>
-      <Painting {...{ paintingCells, onClick: paintCell }}/>
+    <div className="App">
+      <Colors {...{ selectedColor, set_selectedColor, resetPainting }} />
+      <Painting {...{ paintingCells, onClick: handleCellClick }} />
     </div>
-  )
+  );
 }
