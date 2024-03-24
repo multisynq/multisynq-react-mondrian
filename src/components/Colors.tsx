@@ -1,9 +1,10 @@
 
 import { IoIosRefresh } from 'react-icons/io'
+import { BLACK, BLUE, LIGHT_GREY, MACARONI, PALE_GREY, SCARLET } from '../data/paintingCells'
 
 export default function Colors({ selectedColor, set_selectedColor, resetPainting }) {
 
-  const colors = [ '#DB3F27', '#F1BD47', '#003F75', '#060700', '#CBD2DA', '#E7E3DD' ]
+  const colors = [ SCARLET, MACARONI, BLUE, BLACK, PALE_GREY, LIGHT_GREY ]
   const size = 3
 
   function Color({ color }) {

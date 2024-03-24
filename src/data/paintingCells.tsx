@@ -1,10 +1,10 @@
 
-const SCARLET    = '#DB3F27'
-const MACARONI   = '#F1BD47'
-const BLUE       = '#003F75'
-const BLACK      = '#060700'
-const PALE_GREY  = '#CBD2DA'
-const LIGHT_GREY = '#E7E3DD'
+export const SCARLET    = '#DB3F27'
+export const MACARONI   = '#F1BD47'
+export const BLUE       = '#003F75'
+export const BLACK      = '#060700'
+export const PALE_GREY  = '#CBD2DA'
+export const LIGHT_GREY = '#E7E3DD'
 
 export const defaultPaintingCells = [
   { id: 0,  color: PALE_GREY  },
