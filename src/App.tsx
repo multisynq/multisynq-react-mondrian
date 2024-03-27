@@ -3,6 +3,8 @@ import './styles.css'
 import { useState } from 'react'
 import { useModelRoot, usePublish, useSubscribe } from '@croquet/react'
 
+import { BsPeopleFill } from 'react-icons/bs'
+
 import RootModel from './models/root'
 import Colors from './components/Colors'
 import Painting from './components/Painting'
@@ -21,8 +23,8 @@ export default function App() {
 
   const nUsers = users.size
 
-  const publishPaint  = usePublish((data) => [model.painting.id, 'paint', data]) // prettier-ignore
-  const resetPainting = usePublish((    ) => [model.painting.id, 'reset'      ]) // prettier-ignore
+  const publishPaint = usePublish((data) => [model.painting.id, 'paint', data]) // prettier-ignore
+  const resetPainting = usePublish(() => [model.painting.id, 'reset']) // prettier-ignore
 
   const paintCell = (cellId) => {
     if (selectedColor === null) return
@@ -32,9 +34,12 @@ export default function App() {
 
   return (
     <div className='App'>
+      <div className='user-count'>
+        <BsPeopleFill />
+        <span>{nUsers}</span>
+      </div>
       <Colors {...{ selectedColor, set_selectedColor, resetPainting }} />
       <Painting {...{ paintingCells, onClick: paintCell }} />
-      <div>{nUsers}</div>
     </div>
   )
 }

@@ -1,8 +1,8 @@
-.painting {
-  max-width: 40rem;
-  max-height: 40rem;
-  min-width: 20rem;
-  min-height: 20rem;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
 }
 
 .App {
@@ -15,6 +15,13 @@
   width: 100%;
   min-height: 25rem;
   min-width: 10rem;
+}
+
+.painting {
+  max-width: 40rem;
+  max-height: 40rem;
+  min-width: 20rem;
+  min-height: 20rem;
 }
 
 .cell {
@@ -89,4 +96,16 @@
     width: 100%;
     height: 100%;
   }
+}
+
+.user-count {
+  align-self: flex-end;
+  padding: 0.5rem;
+  background-color: gray;
+  color: white;
+  border-radius: 0.5rem 0 0 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
 }
