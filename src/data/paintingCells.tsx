@@ -1,11 +1,11 @@
+export const SCARLET    = '#DB3F27' // prettier-ignore
+export const MACARONI   = '#F1BD47' // prettier-ignore
+export const BLUE       = '#003F75' // prettier-ignore
+export const BLACK      = '#060700' // prettier-ignore
+export const PALE_GREY  = '#CBD2DA' // prettier-ignore
+export const LIGHT_GREY = '#E7E3DD' // prettier-ignore
 
-export const SCARLET    = '#DB3F27'
-export const MACARONI   = '#F1BD47'
-export const BLUE       = '#003F75'
-export const BLACK      = '#060700'
-export const PALE_GREY  = '#CBD2DA'
-export const LIGHT_GREY = '#E7E3DD'
-
+// prettier-ignore
 export const defaultPaintingCells = [
   { id: 0,  color: PALE_GREY  },
   { id: 1,  color: LIGHT_GREY },

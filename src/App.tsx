@@ -13,22 +13,22 @@ export default function App() {
   const [paintingCells, set_paintingCells] = useState(model.cells)
   const [selectedColor, set_selectedColor] = useState(null)
 
-  useSubscribe(model.id, 'cellPainted',   () => set_paintingCells(model.cells))
+  useSubscribe(model.id, 'cellPainted', () => set_paintingCells(model.cells))
   useSubscribe(model.id, 'paintingReset', () => set_paintingCells(model.cells))
 
-  const publishPaint  = usePublish((data) => [model.id, 'paint', data])
-  const resetPainting = usePublish((    ) => [model.id, 'reset'      ])
+  const publishPaint = usePublish((data) => [model.id, 'paint', data])
+  const resetPainting = usePublish(() => [model.id, 'reset'])
 
   const paintCell = (cellId) => {
-    if(selectedColor === null) return
+    if (selectedColor === null) return
     const payload = { cellId, newColor: selectedColor }
     publishPaint(payload)
   }
 
   return (
     <div className='App'>
-      <Colors {...{ selectedColor, set_selectedColor, resetPainting }}/>
-      <Painting {...{ paintingCells, onClick: paintCell }}/>
+      <Colors {...{ selectedColor, set_selectedColor, resetPainting }} />
+      <Painting {...{ paintingCells, onClick: paintCell }} />
     </div>
   )
 }

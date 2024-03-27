@@ -11,6 +11,6 @@
     "lib": ["es2022", "DOM"],
     "jsx": "react-jsx",
     "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
+    "baseUrl": "."
   }
 }
