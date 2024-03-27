@@ -11,7 +11,7 @@ type CellProps = {
 }
 export default function Painting({ paintingCells, onClick }: PaintingProps) {
   const gapSize = 0.25
-  const size = `calc(100vw - (${gapSize}rem * 2))`
+  const size = 'calc(min(100vw, 100vh) - 2rem)'
 
   function Cell({ id, h, w, className = '' }: CellProps) {
     return (
