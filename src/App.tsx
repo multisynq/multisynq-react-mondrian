@@ -3,21 +3,26 @@ import './styles.css'
 import { useState } from 'react'
 import { useModelRoot, usePublish, useSubscribe } from '@croquet/react'
 
-import PaintingModel from './models/painting'
+import RootModel from './models/root'
 import Colors from './components/Colors'
 import Painting from './components/Painting'
 
 export default function App() {
-  const model: PaintingModel = useModelRoot() as PaintingModel
-
-  const [paintingCells, set_paintingCells] = useState(model.cells)
+  const model: RootModel = useModelRoot() as RootModel
+  const [paintingCells, set_paintingCells] = useState(model.painting.cells)
+  const [users, set_users] = useState(model.users)
   const [selectedColor, set_selectedColor] = useState(null)
 
-  useSubscribe(model.id, 'cellPainted', () => set_paintingCells(model.cells))
-  useSubscribe(model.id, 'paintingReset', () => set_paintingCells(model.cells))
+  useSubscribe(model.painting.id, 'cellPainted', () => set_paintingCells(model.painting.cells))
+  useSubscribe(model.painting.id, 'paintingReset', () => set_paintingCells(model.painting.cells))
 
-  const publishPaint = usePublish((data) => [model.id, 'paint', data])
-  const resetPainting = usePublish(() => [model.id, 'reset'])
+  useSubscribe(model.id, 'userJoined', () => set_users(new Set(model.users)))
+  useSubscribe(model.id, 'userLeft', () => set_users(new Set(model.users)))
+
+  const nUsers = users.size
+
+  const publishPaint  = usePublish((data) => [model.painting.id, 'paint', data]) // prettier-ignore
+  const resetPainting = usePublish((    ) => [model.painting.id, 'reset'      ]) // prettier-ignore
 
   const paintCell = (cellId) => {
     if (selectedColor === null) return
@@ -29,6 +34,7 @@ export default function App() {
     <div className='App'>
       <Colors {...{ selectedColor, set_selectedColor, resetPainting }} />
       <Painting {...{ paintingCells, onClick: paintCell }} />
+      <div>{nUsers}</div>
     </div>
   )
 }

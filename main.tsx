@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client'
 
 import { CroquetRoot } from '@croquet/react'
-import PaintingModel from './src/models/painting'
+import RootModel from './src/models/root'
 
 import App from './src/App'
 
@@ -10,7 +10,7 @@ createRoot(container!).render(
   <CroquetRoot
     sessionParams={{
       name: 'painting',
-      model: PaintingModel,
+      model: RootModel,
       appId: import.meta.env['VITE_CROQUET_APP_ID'],
       apiKey: import.meta.env['VITE_CROQUET_API_KEY'],
       password: 'abc',
