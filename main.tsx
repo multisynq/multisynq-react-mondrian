@@ -9,11 +9,11 @@ const container = document.getElementById('root')
 createRoot(container!).render(
   <CroquetRoot
     sessionParams={{
-      name: 'painting',
       model: RootModel,
+      name: import.meta.env['VITE_CROQUET_NAME'],
       appId: import.meta.env['VITE_CROQUET_APP_ID'],
       apiKey: import.meta.env['VITE_CROQUET_API_KEY'],
-      password: 'abc',
+      password: import.meta.env['VITE_CROQUET_PASSWORD'],
     }}
   >
     <App />
