@@ -17,29 +17,13 @@ body {
   min-width: 10rem;
 }
 
-.painting {
-  max-width: 40rem;
-  max-height: 40rem;
-  min-width: 20rem;
-  min-height: 20rem;
-}
-
-.cell {
-  width: 100%;
-  min-width: 1rem;
-  min-height: 1rem;
-  margin: 0;
-  padding: 0;
-  flex-grow: 1;
-}
-
+.painting,
 .row,
 .col {
   display: flex;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
+  gap: 2px;
   align-items: stretch;
-  align-content: stretch;
+  align-content: space-between;
 }
 
 .row {
@@ -47,7 +31,6 @@ body {
 }
 
 .col {
-  flex-grow: 1;
   flex-direction: column;
 }
 
@@ -68,15 +51,6 @@ body {
   gap: 2vw;
   max-width: 35rem;
   justify-content: center;
-}
-
-@media screen and (min-width: 50rem) {
-  .colors {
-    gap: 1rem;
-  }
-  .color svg {
-    padding: 0.5rem !important;
-  }
 }
 
 .color {
@@ -108,4 +82,53 @@ body {
   gap: 0.5rem;
   align-items: center;
   justify-content: center;
+}
+
+@media screen and (min-width: 50rem) {
+  .colors {
+    gap: 1rem;
+  }
+  .color svg {
+    padding: 0.5rem !important;
+  }
+}
+
+@media screen and (min-width: 10rem) {
+  .painting,
+  .row,
+  .col {
+    gap: 3px;
+  }
+}
+
+@media screen and (min-width: 20rem) {
+  .painting,
+  .row,
+  .col {
+    gap: 4px;
+  }
+}
+
+@media screen and (min-width: 30rem) {
+  .painting,
+  .row,
+  .col {
+    gap: 6px;
+  }
+}
+
+@media screen and (min-width: 40rem) {
+  .painting,
+  .row,
+  .col {
+    gap: 8px;
+  }
+}
+
+@media screen and (min-width: 50rem) {
+  .painting,
+  .row,
+  .col {
+    gap: 9px;
+  }
 }
