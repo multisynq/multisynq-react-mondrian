@@ -1,0 +1,28 @@
+.croquet-qr-container {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  margin: 5px;
+  background-color: white;
+  border: 1px dotted black;
+  border-radius: 10px;
+}
+
+.croquet-qr-container .top-bar {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: 10px;
+}
+
+.croquet-qr-container .bottom-bar {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.croquet-qr-container .bottom-bar .url {
+  flex-grow: 1;
+  overflow-x: scroll;
+  white-space: nowrap;
+  padding: 10px;
+}
