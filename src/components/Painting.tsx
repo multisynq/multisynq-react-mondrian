@@ -78,7 +78,7 @@ export default function Painting({ paintingCells, onClick }: PaintingProps) {
           </Row>
         </Col>
         <Col>
-          <Cell grow={3.9} id={1} />
+          <Cell id={18} grow={3.9} />
           <Cell id={19} />
         </Col>
       </Row>
