@@ -6,6 +6,7 @@
   background-color: white;
   border: 0.1rem solid black;
   border-radius: 0.5rem;
+  transition: width 0.2s, padding 0.2s;
 }
 
 .croquet-qr-container .top-bar {

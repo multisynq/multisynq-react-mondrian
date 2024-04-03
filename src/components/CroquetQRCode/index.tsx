@@ -19,8 +19,6 @@ export default function CroquetQRCode() {
   const isExpanded = isPinned || hovering
   const size = isExpanded ? SIZE_BIG : SIZE_SMALL
 
-  const padding = isExpanded ? '' : `calc(${SIZE_SMALL}px / 10)`
-
   const togglePin = () => setIsPinned((prev) => !prev)
   const handleQRClick = () => window.open(location, '_blank')
 
@@ -35,10 +33,9 @@ export default function CroquetQRCode() {
       ref={ref}
       className='croquet-qr-container'
       style={{
-        padding,
+        padding: isExpanded ? '' : `calc(${SIZE_SMALL}px / 10)`,
         borderWidth: isExpanded ? '0.2rem' : `calc(${SIZE_SMALL}px / 30)`,
-        minWidth: `calc(${SIZE_SMALL}px + ${padding})`,
-        maxWidth: `${size}px`,
+        width: `${size}px`,
         opacity: isExpanded ? OPACITY_BIG : OPACITY_SMALL,
       }}
     >
