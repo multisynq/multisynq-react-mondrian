@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { Model, useModelRoot, usePublish, useSubscribe } from "@croquet/react";
+import { useState } from "react";
+import { Model, usePublish, useSubscribe } from "@croquet/react";
 import { defaultPaintingCells } from "../data/paintingCells";
 
 export class ReactModel extends Model {
-  events: { scope: string; event: string }[];
+  __reactEvents: { scope: string; event: string }[];
 
   init(options) {
     super.init(options);
-    this.events = [];
+    this.__reactEvents = [];
   }
 
   subscribe<T>(
@@ -15,61 +15,67 @@ export class ReactModel extends Model {
     event: string,
     methodName: string | ((e: T) => void)
   ): void {
-    this.events.push({ scope, event });
-    // super.subscribe(scope, event, methodName);
-    // super.subscribe(scope, event, this.publishUpdate)
+    this.__reactEvents.push({ scope, event });
 
-    // // For now it's not possible to wrap methodName
-    // // inside a decorator, because we would lose the
-    // // reference to it (we cannot serialize closures in Croquet)
     if (typeof methodName === "function") {
       methodName = methodName.name;
     }
-    console.log("Subscribing...", methodName);
+    
+    // This is a hacky (and maybe dubious) way to add
+    // custom logic before and after the Model handler
+    // is called. Since closures cannot be serialized, we
+    // need to convert `hack` to a String, replace the lost
+    // values with literals (obtained at runtime) and then
+    // convert that string into a function again.
+    // That function will be used by a (yet) undocumented 
+    // feature of Croquet that allows you to pass a function
+    // instead of a method.
     function hack(data) {
-      // Do some stuff...
-      console.log("Event received in model!!");
-
       this.methodName(data);
-
-      // Do some other stuff...
-      console.log("publishing react-updated event");
       this.publish(this.id, "react-updated");
     }
 
     const hackString = hack
       .toString()
+      //
+      // replace methodName by the actual method name
       .replace("methodName", methodName)
+      //
+      // replace 'this.id' by the id literal
       .replace("this.id", JSON.stringify(this.id))
+      //
+      // extract only the function body
       .replace(/^[^{]+\{/, "")
       .replace(/\}[^}]*$/, "");
 
-    // console.log(hackString)
-
+    // this function will receive a single argument: data
     const func = new Function("data", hackString);
-
-    // console.log(func)
 
     super.subscribe(scope, event, func);
   }
 }
 ReactModel.register("ReactModel");
 
-export function hookifyModel<T>(model: ReactModel): Omit<T, "init"> {
-  const methods = {};
-
-  const [modelState, setModelState] = useState(model);
-
+export function hookifyModel<T>(model: T): Omit<T, "init"> {
+  const [modelState, setModelState] = useState({...model});
+  
   useSubscribe(model.id, "react-updated", () => {
-    console.log("Vanessa is right!!", model);
-    setModelState(model);
+    setModelState({...model});
   });
-
-  model.events.forEach(({ scope, event }) => {
+  
+  const methods = {};
+  model.__reactEvents.forEach(({ scope, event }) => {
     methods[event] = usePublish((data) => [scope, event, data]);
   });
+  
+  const properties = {};
+  for(const p in modelState) {
+    if(p !== '__reactEvents') {
+      properties[p] = modelState[p]
+    }
+  }
 
-  return { ...methods } as T;
+  return { ...properties, ...methods } as T;
 }
 
 export class PaintingModel extends ReactModel {
@@ -98,20 +104,3 @@ export class PaintingModel extends ReactModel {
   }
 }
 PaintingModel.register("PaintingModel");
-
-// export function usePaintingModel() {
-//   const model: PaintingModel = useModelRoot() as PaintingModel;
-
-//   const [paintingCells, set_paintingCells] = useState(model.cells);
-//   useSubscribe(model.id, "cellPainted",   () => set_paintingCells(model.cells));
-//   useSubscribe(model.id, "paintingReset", () => set_paintingCells(model.cells));
-
-//   const paint = usePublish((data) => [model.id, "paint", data]);
-//   const reset = usePublish((    ) => [model.id, "reset"      ]);
-
-//   return {
-//     paintingCells,
-//     paint,
-//     reset,
-//   };
-// }

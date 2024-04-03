@@ -9,21 +9,14 @@ import Painting from "./components/Painting";
 
 export default function App() {
   const {
-    // cells: paintingCells, // This is what we need now...
-    data,
+    cells,
     paint,
-    reset
-  } = hookifyModel<PaintingModel>(useModelRoot() as ReactModel);
+    reset,
+  } = hookifyModel<PaintingModel>(useModelRoot() as PaintingModel);
 
-  console.log("We got data", data)
+  console.log("We got data", cells);
 
-  
-
-  // We still need this code to get the model data. Eventually this will be wiped off
-  const model: PaintingModel = useModelRoot() as PaintingModel;
-  const [paintingCells, set_paintingCells] = useState(model.cells);
-  useSubscribe(model.id, "cellPainted", () => set_paintingCells(model.cells));
-  useSubscribe(model.id, "paintingReset", () => set_paintingCells(model.cells));
+  const paintingCells = cells
 
   const [selectedColor, set_selectedColor] = useState(null);
 
@@ -32,7 +25,9 @@ export default function App() {
     const payload = { cellId, newColor: selectedColor };
     paint(payload);
   };
-
+  if (!paintingCells) {
+    return null;
+  }
   return (
     <div className="App">
       <Colors {...{ selectedColor, set_selectedColor, reset }} />
