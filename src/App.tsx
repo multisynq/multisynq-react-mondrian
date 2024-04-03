@@ -7,13 +7,7 @@ import Colors from "./components/Colors";
 import Painting from "./components/Painting";
 
 export default function App() {
-  const {
-    cells,
-    paint,
-    reset,
-  } = useModel<PaintingModel>();
-
-  const paintingCells = cells
+  const { cells, paint, reset } = useModel<PaintingModel>();
 
   const [selectedColor, set_selectedColor] = useState(null);
 
@@ -22,13 +16,11 @@ export default function App() {
     const payload = { cellId, newColor: selectedColor };
     paint(payload);
   };
-  if (!paintingCells) {
-    return null;
-  }
+  
   return (
     <div className="App">
       <Colors {...{ selectedColor, set_selectedColor, reset }} />
-      <Painting {...{ paintingCells, onClick: handleCellClick }} />
+      <Painting {...{ paintingCells: cells, onClick: handleCellClick }} />
     </div>
   );
 }
