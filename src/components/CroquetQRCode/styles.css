@@ -2,21 +2,42 @@
   position: fixed;
   bottom: 0px;
   left: 0px;
-  margin: 5px;
+  margin: 0.5rem;
   background-color: white;
-  border: 1px dotted black;
-  border-radius: 10px;
+  border: 0.2rem solid black;
+  border-radius: 0.5rem;
 }
 
 .croquet-qr-container .top-bar {
   display: flex;
-  flex-direction: row-reverse;
-  margin-bottom: 10px;
+  justify-content: flex-end;
+}
+
+.croquet-qr-container .top-bar > * {
+  border: 0.2rem solid black;
+  border-top: none;
+  border-right: none;
+  border-radius: 0 0 0 0.5rem;
+  padding: 0.5rem;
+  stroke-width: 0.05rem;
+}
+
+.croquet-qr-container .qr {
+  display: flex;
+  cursor: pointer;
+}
+
+.croquet-qr-container .qr svg {
+  aspect-ratio: 1;
+  width: 100%;
+  height: auto;
 }
 
 .croquet-qr-container .bottom-bar {
+  padding: 0.5rem;
+  padding-top: 0;
   display: flex;
-  gap: 5px;
+  gap: 0.5rem;
   align-items: center;
 }
 
@@ -24,5 +45,14 @@
   flex-grow: 1;
   overflow-x: scroll;
   white-space: nowrap;
-  padding: 10px;
+  padding: 0.5rem;
+}
+
+.croquet-qr-container .button {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  width: 15px;
+  height: 15px;
+  display: flex;
 }
