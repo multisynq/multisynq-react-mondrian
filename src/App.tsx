@@ -9,11 +9,19 @@ import RootModel from './models/root'
 import Colors from './components/Colors'
 import Painting from './components/Painting'
 
-export default function App() {
+export default function App({ sessionName, setSession }) {
   const model: RootModel = useModelRoot() as RootModel
   const [paintingCells, set_paintingCells] = useState(model.painting.cells)
   const [users, set_users] = useState(model.users)
   const [selectedColor, set_selectedColor] = useState(null)
+
+  const toggleSession = () => {
+    if (sessionName === 'painting') {
+      setSession('the-other-session')
+    } else {
+      setSession('painting')
+    }
+  }
 
   useSubscribe(model.painting.id, 'cellPainted', () => set_paintingCells(model.painting.cells))
   useSubscribe(model.painting.id, 'paintingReset', () => set_paintingCells(model.painting.cells))
@@ -34,6 +42,8 @@ export default function App() {
 
   return (
     <div className='App'>
+      {sessionName}
+      <button onClick={toggleSession}>Change Session</button>
       <div className='user-count'>
         <BsPeopleFill />
         <span>{nUsers}</span>
