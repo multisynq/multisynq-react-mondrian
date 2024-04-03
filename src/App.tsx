@@ -14,8 +14,6 @@ export default function App() {
     reset,
   } = hookifyModel<PaintingModel>(useModelRoot() as PaintingModel);
 
-  console.log("We got data", cells);
-
   const paintingCells = cells
 
   const [selectedColor, set_selectedColor] = useState(null);
