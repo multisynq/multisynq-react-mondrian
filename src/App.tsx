@@ -10,10 +10,14 @@ import Painting from "./components/Painting";
 export default function App() {
   const {
     // cells: paintingCells, // This is what we need now...
+    data,
     paint,
     reset
   } = hookifyModel<PaintingModel>(useModelRoot() as ReactModel);
 
+  console.log("We got data", data)
+
+  
 
   // We still need this code to get the model data. Eventually this will be wiped off
   const model: PaintingModel = useModelRoot() as PaintingModel;

@@ -15,25 +15,55 @@ export class ReactModel extends Model {
     event: string,
     methodName: string | ((e: T) => void)
   ): void {
-    this.events.push({ scope, event })
-    super.subscribe(scope, event, methodName);
+    this.events.push({ scope, event });
+    // super.subscribe(scope, event, methodName);
+    // super.subscribe(scope, event, this.publishUpdate)
 
     // // For now it's not possible to wrap methodName
     // // inside a decorator, because we would lose the
     // // reference to it (we cannot serialize closures in Croquet)
+    if (typeof methodName === "function") {
+      methodName = methodName.name;
+    }
+    console.log("Subscribing...", methodName);
+    function hack(data) {
+      // Do some stuff...
+      console.log("Event received in model!!");
 
-    // super.subscribe(scope, event, (data) => {
-    //   // Do some stuff...
-    //   methodName(data)
-    //   // Do some other stuff...
-    // })
+      this.methodName(data);
+
+      // Do some other stuff...
+      console.log("publishing react-updated event");
+      this.publish(this.id, "react-updated");
+    }
+
+    const hackString = hack
+      .toString()
+      .replace("methodName", methodName)
+      .replace("this.id", JSON.stringify(this.id))
+      .replace(/^[^{]+\{/, "")
+      .replace(/\}[^}]*$/, "");
+
+    // console.log(hackString)
+
+    const func = new Function("data", hackString);
+
+    // console.log(func)
+
+    super.subscribe(scope, event, func);
   }
 }
 ReactModel.register("ReactModel");
 
-
 export function hookifyModel<T>(model: ReactModel): Omit<T, "init"> {
   const methods = {};
+
+  const [modelState, setModelState] = useState(model);
+
+  useSubscribe(model.id, "react-updated", () => {
+    console.log("Vanessa is right!!", model);
+    setModelState(model);
+  });
 
   model.events.forEach(({ scope, event }) => {
     methods[event] = usePublish((data) => [scope, event, data]);
