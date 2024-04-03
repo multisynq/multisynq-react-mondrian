@@ -1,9 +1,8 @@
 import "./styles.css";
 
 import { useState } from "react";
-import { useModelRoot, useSubscribe } from "@croquet/react";
 
-import { hookifyModel, ReactModel, PaintingModel } from "./models/painting";
+import { useModel, PaintingModel } from "./models/painting";
 import Colors from "./components/Colors";
 import Painting from "./components/Painting";
 
@@ -12,7 +11,7 @@ export default function App() {
     cells,
     paint,
     reset,
-  } = hookifyModel<PaintingModel>(useModelRoot() as PaintingModel);
+  } = useModel<PaintingModel>();
 
   const paintingCells = cells
 

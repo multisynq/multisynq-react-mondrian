@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Model, usePublish, useSubscribe } from "@croquet/react";
 import { defaultPaintingCells } from "../data/paintingCells";
+import { useModelRoot } from "@croquet/react";
 
 export class ReactModel extends Model {
   __reactEvents: { scope: string; event: string }[];
@@ -53,19 +54,21 @@ export class ReactModel extends Model {
 }
 ReactModel.register("ReactModel");
 
-export function hookifyModel<T>(model: T): Omit<T, "init"> {
+export function useModel<T extends ReactModel>(): T {
+  const model = useModelRoot() as T;
+
   const [modelState, setModelState] = useState({...model});
   
   useSubscribe(model.id, "react-updated", () => {
     setModelState({...model});
   });
   
-  const methods = {};
+  const methods: Partial<T> = {};
   model.__reactEvents.forEach(({ scope, event }) => {
     methods[event] = usePublish((data) => [scope, event, data]);
   });
   
-  const properties = {};
+  const properties: Partial<T> = {};
   for(const p in modelState) {
     if(p !== '__reactEvents') {
       properties[p] = modelState[p]
@@ -75,10 +78,17 @@ export function hookifyModel<T>(model: T): Omit<T, "init"> {
   return { ...properties, ...methods } as T;
 }
 
-export class PaintingModel extends ReactModel {
+export class PaintingModel extends ReactModel {  
   cells: { id: number; color: string }[];
 
   init(options) {
+    // super.init({
+    //   ...options,
+    //   handlers: [
+    //     this.paint,
+    //     this.reset
+    //   ]
+    // })
     super.init(options);
     this.cells = defaultPaintingCells;
 
