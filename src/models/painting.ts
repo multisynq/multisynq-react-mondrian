@@ -1,24 +1,64 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Model, useModelRoot, usePublish, useSubscribe } from "@croquet/react";
 import { defaultPaintingCells } from "../data/paintingCells";
 
-export class PaintingModel extends Model {
+export class ReactModel extends Model {
+  events: { scope: string; event: string }[];
+
+  init(options) {
+    super.init(options);
+    this.events = [];
+  }
+
+  subscribe<T>(
+    scope: string,
+    event: string,
+    methodName: string | ((e: T) => void)
+  ): void {
+    this.events.push({ scope, event })
+    super.subscribe(scope, event, methodName);
+
+    // // For now it's not possible to wrap methodName
+    // // inside a decorator, because we would lose the
+    // // reference to it (we cannot serialize closures in Croquet)
+
+    // super.subscribe(scope, event, (data) => {
+    //   // Do some stuff...
+    //   methodName(data)
+    //   // Do some other stuff...
+    // })
+  }
+}
+ReactModel.register("ReactModel");
+
+
+export function hookifyModel<T>(model: ReactModel): Omit<T, "init"> {
+  const methods = {};
+
+  model.events.forEach(({ scope, event }) => {
+    methods[event] = usePublish((data) => [scope, event, data]);
+  });
+
+  return { ...methods } as T;
+}
+
+export class PaintingModel extends ReactModel {
   cells: { id: number; color: string }[];
 
   init(options) {
     super.init(options);
     this.cells = defaultPaintingCells;
 
-    this.subscribe(this.id, "paint", this.paintCell);
-    this.subscribe(this.id, "reset", this.resetPainting);
+    this.subscribe(this.id, "paint", this.paint);
+    this.subscribe(this.id, "reset", this.reset);
   }
 
-  resetPainting() {
+  reset() {
     this.cells = defaultPaintingCells;
     this.publish(this.id, "paintingReset");
   }
 
-  paintCell(data) {
+  paint(data) {
     if (!data) return;
     const { cellId, newColor } = data;
     this.cells = this.cells.map((cell) =>
@@ -29,19 +69,19 @@ export class PaintingModel extends Model {
 }
 PaintingModel.register("PaintingModel");
 
-export function usePaintingModel() {
-  const model: PaintingModel = useModelRoot() as PaintingModel;
+// export function usePaintingModel() {
+//   const model: PaintingModel = useModelRoot() as PaintingModel;
 
-  const [paintingCells, set_paintingCells] = useState(model.cells);
-  useSubscribe(model.id, "cellPainted",   () => set_paintingCells(model.cells));
-  useSubscribe(model.id, "paintingReset", () => set_paintingCells(model.cells));
+//   const [paintingCells, set_paintingCells] = useState(model.cells);
+//   useSubscribe(model.id, "cellPainted",   () => set_paintingCells(model.cells));
+//   useSubscribe(model.id, "paintingReset", () => set_paintingCells(model.cells));
 
-  const paintCell     = usePublish((data) => [model.id, "paint", data]);
-  const resetPainting = usePublish((    ) => [model.id, "reset"      ]);
+//   const paint = usePublish((data) => [model.id, "paint", data]);
+//   const reset = usePublish((    ) => [model.id, "reset"      ]);
 
-  return {
-    paintingCells,
-    paintCell,
-    resetPainting,
-  };
-}
+//   return {
+//     paintingCells,
+//     paint,
+//     reset,
+//   };
+// }

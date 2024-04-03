@@ -2,7 +2,7 @@
 import { IoIosRefresh } from 'react-icons/io'
 import { BLACK, BLUE, LIGHT_GREY, MACARONI, PALE_GREY, SCARLET } from '../data/paintingCells'
 
-export default function Colors({ selectedColor, set_selectedColor, resetPainting }) {
+export default function Colors({ selectedColor, set_selectedColor, reset }) {
 
   const colors = [ SCARLET, MACARONI, BLUE, BLACK, PALE_GREY, LIGHT_GREY ]
   const size = 3
@@ -37,7 +37,7 @@ export default function Colors({ selectedColor, set_selectedColor, resetPainting
   return (
     <div className='colors'>
       <Button {...{
-        onClick: resetPainting,
+        onClick: () => reset(),
         icon: <IoIosRefresh size={`${size/1.5}rem`} />
       }} />
       {colors.map((color) => <Color key={color} color={color} />)}

@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client'
 
 import { CroquetRoot } from '@croquet/react'
-import PaintingModel from './src/models/painting'
+import { PaintingModel } from './src/models/painting'
 
 import App from './src/App'
 
