@@ -9,6 +9,7 @@ import RootModel from './models/root'
 import Colors from './components/Colors'
 import Painting from './components/Painting'
 import { useSessionManager } from './components/SessionManager'
+import CroquetQRCode from './components/CroquetQRCode'
 
 export default function App() {
   const model: RootModel = useModelRoot() as RootModel
@@ -53,6 +54,7 @@ export default function App() {
       </div>
       <Colors {...{ selectedColor, set_selectedColor, resetPainting }} />
       <Painting {...{ paintingCells, onClick: paintCell }} />
+      <CroquetQRCode />
     </div>
   )
 }
