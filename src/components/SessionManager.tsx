@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useMemo, useState } from 'react'
 import { CroquetRoot } from '@croquet/react'
+import { sessions } from '../data/sessions'
 
 import RootModel from '../models/root'
 
@@ -7,8 +8,8 @@ const SessionContext = createContext(null)
 
 export default function SessionManager({ children }) {
   const [session, setSession] = useState({
-    name: import.meta.env['VITE_CROQUET_NAME'],
-    password: import.meta.env['VITE_CROQUET_PASSWORD'],
+    name: sessions[0].name,
+    password: sessions[0].password,
   })
   const { name, password } = session
 
