@@ -6,7 +6,7 @@ import { LuClipboardCheck, LuClipboardList } from 'react-icons/lu'
 import './styles.css'
 
 export default function CroquetQRCode() {
-  const [isPinned, setIsPinned] = useState(true)
+  const [isPinned, setIsPinned] = useState(false)
   const [copyIcon, setCopyIcon] = useState(<LuClipboardList />)
   const [ref, hovering] = useHover()
 
