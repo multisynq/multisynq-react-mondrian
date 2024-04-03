@@ -47,7 +47,7 @@ export class ReactModel extends Model {
       .replace(/\}[^}]*$/, "");
 
     // this function will receive a single argument: data
-    const func = new Function("data", hackString);
+    const func = new Function("data", hackString) as (e: unknown) => void;
 
     super.subscribe(scope, event, func);
   }
