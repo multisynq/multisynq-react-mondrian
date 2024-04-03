@@ -1,7 +1,8 @@
 {
-  "name": "react-croquet-mondrian",
+  "name": "croquet-react-mondrian",
+  "description": "Multiplayer Art Game",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,7 +12,7 @@
     "lines_of_code": "cloc --exclude-dir=node_modules --not-match-f='.*\\.(svg|md|toml)' ."
   },
   "dependencies": {
-    "@croquet/react": "^1.4.3",
+    "@croquet/react": "^1.4.4",
     "@uidotdev/usehooks": "^2.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -19,13 +20,13 @@
     "react-qr-code": "^2.0.12"
   },
   "devDependencies": {
-    "@types/react": "^18.2.43",
-    "@types/react-dom": "^18.2.17",
+    "@types/react": "^18.2.73",
+    "@types/react-dom": "^18.2.23",
     "@vitejs/plugin-react": "^4.2.1",
-    "eslint": "^8.55.0",
-    "eslint-plugin-react": "^7.33.2",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.5",
-    "vite": "^5.0.8"
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "vite": "^5.2.7"
   }
 }
