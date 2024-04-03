@@ -15,12 +15,10 @@ class RootModel extends Model {
   }
 
   userJoined(viewId) {
-    console.log('userJoined', viewId)
     this.users.add(viewId)
     this.publish(this.id, 'userJoined', viewId)
   }
   userLeft(viewId) {
-    console.log('userLeft', viewId)
     this.users.delete(viewId)
     this.publish(this.id, 'userLeft', viewId)
   }

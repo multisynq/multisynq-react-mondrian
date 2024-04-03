@@ -42,20 +42,19 @@ export default function App() {
   const dropdownOptions = sessions.map((s) => ({ value: s, label: s.name }))
   const selectedOption = sessions.findIndex((s) => s.name === sessionName)
   const handleDropdownChange = (selectedIdx) => {
-    console.log(selectedIdx)
     const s = sessions[selectedIdx]
-    console.log(sessions, s)
     changeSession(s.name, s.password)
   }
 
   return (
     <div className='App'>
-
-      <Dropdown {...{
-        selected: selectedOption,
-        options: dropdownOptions,
-        onChange: handleDropdownChange,
-      }} />
+      <Dropdown
+        {...{
+          selected: selectedOption,
+          options: dropdownOptions,
+          onChange: handleDropdownChange,
+        }}
+      />
 
       <div className='user-count'>
         <BsPeopleFill />
