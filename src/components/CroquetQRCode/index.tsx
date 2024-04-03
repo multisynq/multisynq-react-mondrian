@@ -10,12 +10,16 @@ export default function CroquetQRCode() {
   const [copyIcon, setCopyIcon] = useState(<LuClipboardList />)
   const [ref, hovering] = useHover()
 
-  const BIG_SIZE = 200
-  const SMALL_SIZE = 75
+  const SIZE_BIG = 200
+  const SIZE_SMALL = 75
+  const OPACITY_SMALL = 0.8
+  const OPACITY_BIG = 1
 
   const location = window.location.href
   const isExpanded = isPinned || hovering
-  const size = isExpanded ? BIG_SIZE : SMALL_SIZE
+  const size = isExpanded ? SIZE_BIG : SIZE_SMALL
+
+  const padding = isExpanded ? '' : `calc(${SIZE_SMALL}px / 10)`
 
   const togglePin = () => setIsPinned((prev) => !prev)
   const handleQRClick = () => window.open(location, '_blank')
@@ -31,8 +35,11 @@ export default function CroquetQRCode() {
       ref={ref}
       className='croquet-qr-container'
       style={{
-        padding: isExpanded ? '' : '7px',
+        padding,
+        borderWidth: isExpanded ? '0.2rem' : `calc(${SIZE_SMALL}px / 30)`,
+        minWidth: `calc(${SIZE_SMALL}px + ${padding})`,
         maxWidth: `${size}px`,
+        opacity: isExpanded ? OPACITY_BIG : OPACITY_SMALL,
       }}
     >
       {isExpanded && (

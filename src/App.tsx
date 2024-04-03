@@ -8,8 +8,11 @@ import { BsPeopleFill } from 'react-icons/bs'
 import RootModel from './models/root'
 import Colors from './components/Colors'
 import Painting from './components/Painting'
+import Dropdown from './components/Dropdown'
 import { useSessionManager } from './components/SessionManager'
 import CroquetQRCode from './components/CroquetQRCode'
+
+import { sessions } from './data/sessions'
 
 export default function App() {
   const model: RootModel = useModelRoot() as RootModel
@@ -17,15 +20,7 @@ export default function App() {
   const [users, set_users] = useState(model.users)
   const [selectedColor, set_selectedColor] = useState(null)
 
-  const { sessionName, renameSession } = useSessionManager()
-
-  const toggleSession = () => {
-    if (sessionName === 'painting') {
-      renameSession('the-other-session')
-    } else {
-      renameSession('painting')
-    }
-  }
+  const { sessionName, changeSession } = useSessionManager()
 
   useSubscribe(model.painting.id, 'cellPainted', () => set_paintingCells(model.painting.cells))
   useSubscribe(model.painting.id, 'paintingReset', () => set_paintingCells(model.painting.cells))
@@ -44,14 +39,29 @@ export default function App() {
     publishPaint(payload)
   }
 
+  const dropdownOptions = sessions.map((s) => ({ value: s, label: s.name }))
+  const selectedOption = sessions.findIndex((s) => s.name === sessionName)
+  const handleDropdownChange = (selectedIdx) => {
+    console.log(selectedIdx)
+    const s = sessions[selectedIdx]
+    console.log(sessions, s)
+    changeSession(s.name, s.password)
+  }
+
   return (
     <div className='App'>
-      {sessionName}
-      <button onClick={toggleSession}>Change Session</button>
+
+      <Dropdown {...{
+        selected: selectedOption,
+        options: dropdownOptions,
+        onChange: handleDropdownChange,
+      }} />
+
       <div className='user-count'>
         <BsPeopleFill />
         <span>{nUsers}</span>
       </div>
+
       <Colors {...{ selectedColor, set_selectedColor, resetPainting }} />
       <Painting {...{ paintingCells, onClick: paintCell }} />
       <CroquetQRCode />

@@ -1,14 +1,14 @@
 export const sessions = [
   {
-    name: 'gallery-1',
+    name: 'studio-1',
     password: 'password-1',
   },
   {
-    name: 'gallery-2',
+    name: 'studio-2',
     password: 'password-2',
   },
   {
-    name: 'gallery-3',
+    name: 'studio-3',
     password: 'password-3',
   },
 ]

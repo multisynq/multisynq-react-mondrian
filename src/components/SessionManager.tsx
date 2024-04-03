@@ -13,16 +13,16 @@ export default function SessionManager({ children }) {
   })
   const { name, password } = session
 
-  const renameSession = useCallback((newName: string) => {
-    setSession({ name: newName, password })
+  const changeSession = useCallback((newName: string, newPassword: string) => {
+    setSession({ name: newName, password: newPassword })
   }, [])
 
   const contextValue = useMemo(
     () => ({
       sessionName: name,
-      renameSession,
+      changeSession,
     }),
-    [session, renameSession]
+    [session, changeSession]
   )
 
   return (
