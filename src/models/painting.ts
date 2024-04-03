@@ -41,9 +41,6 @@ export class ReactModel extends Model {
       // replace methodName by the actual method name
       .replace("methodName", methodName)
       //
-      // replace 'this.id' by the id literal
-      .replace("this.id", JSON.stringify(this.id))
-      //
       // extract only the function body
       .replace(/^[^{]+\{/, "")
       .replace(/\}[^}]*$/, "");
