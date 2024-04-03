@@ -8,18 +8,21 @@ import { BsPeopleFill } from 'react-icons/bs'
 import RootModel from './models/root'
 import Colors from './components/Colors'
 import Painting from './components/Painting'
+import { useSessionManager } from './components/SessionManager'
 
-export default function App({ sessionName, setSession }) {
+export default function App() {
   const model: RootModel = useModelRoot() as RootModel
   const [paintingCells, set_paintingCells] = useState(model.painting.cells)
   const [users, set_users] = useState(model.users)
   const [selectedColor, set_selectedColor] = useState(null)
 
+  const { sessionName, renameSession } = useSessionManager()
+
   const toggleSession = () => {
     if (sessionName === 'painting') {
-      setSession('the-other-session')
+      renameSession('the-other-session')
     } else {
-      setSession('painting')
+      renameSession('painting')
     }
   }
 

@@ -1,18 +1,28 @@
+import { createContext, useCallback, useContext, useMemo, useState } from 'react'
 import { CroquetRoot } from '@croquet/react'
-import RootModel from '../models/root'
-import { useState } from 'react'
-import App from '../App'
 
-export default function SessionManager() {
+import RootModel from '../models/root'
+
+const SessionContext = createContext(null)
+
+export default function SessionManager({ children }) {
   const [session, setSession] = useState({
     name: import.meta.env['VITE_CROQUET_NAME'],
     password: import.meta.env['VITE_CROQUET_PASSWORD'],
   })
   const { name, password } = session
 
-  const renameSession = (newName: string) => {
+  const renameSession = useCallback((newName: string) => {
     setSession({ name: newName, password })
-  }
+  }, [])
+
+  const contextValue = useMemo(
+    () => ({
+      sessionName: name,
+      renameSession,
+    }),
+    [session, renameSession]
+  )
 
   return (
     <CroquetRoot
@@ -25,7 +35,15 @@ export default function SessionManager() {
         password,
       }}
     >
-      <App sessionName={name} setSession={renameSession} />
+      <SessionContext.Provider value={contextValue}>{children}</SessionContext.Provider>
     </CroquetRoot>
   )
+}
+
+export function useSessionManager() {
+  const context = useContext(SessionContext)
+  if (context === null) {
+    throw new Error('You must be inside a SessionManager context')
+  }
+  return context
 }

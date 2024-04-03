@@ -7,8 +7,8 @@ import SessionManager from './src/components/SessionManager'
 const container = document.getElementById('root')
 createRoot(container!).render(
   <StrictMode>
-    <SessionManager />
-    {/* <App /> */}
-    {/* </SessionManager> */}
+    <SessionManager>
+      <App />
+    </SessionManager>
   </StrictMode>
 )
