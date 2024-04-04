@@ -15,6 +15,12 @@ import CroquetQRCode from './components/CroquetQRCode'
 import { sessions } from './data/sessions'
 
 export default function App() {
+  // This allows to control which components are displayed in this demo
+  const searchParams = new URLSearchParams(document.location.search)
+  const showQR = searchParams.get('showQR') !== 'false'
+  const showUserCount = searchParams.get('showUserCount') !== 'false'
+  const showSessionDropdown = searchParams.get('showSessionDropdown') !== 'false'
+
   const model: RootModel = useModelRoot() as RootModel
   const [paintingCells, set_paintingCells] = useState(model.painting.cells)
   const [users, set_users] = useState(model.users)
@@ -48,22 +54,26 @@ export default function App() {
 
   return (
     <div className='App'>
-      <Dropdown
-        {...{
-          selected: selectedOption,
-          options: dropdownOptions,
-          onChange: handleDropdownChange,
-        }}
-      />
+      {showSessionDropdown && (
+        <Dropdown
+          {...{
+            selected: selectedOption,
+            options: dropdownOptions,
+            onChange: handleDropdownChange,
+          }}
+        />
+      )}
 
-      <div className='user-count'>
-        <BsPeopleFill />
-        <span>{nUsers}</span>
-      </div>
+      {showUserCount && (
+        <div className='user-count'>
+          <BsPeopleFill />
+          <span>{nUsers}</span>
+        </div>
+      )}
 
       <Colors {...{ selectedColor, set_selectedColor, resetPainting }} />
       <Painting {...{ paintingCells, onClick: paintCell }} />
-      <CroquetQRCode />
+      {showQR && <CroquetQRCode />}
     </div>
   )
 }
