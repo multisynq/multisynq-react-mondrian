@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useMemo, useState } from 'react'
+import { createContext, useCallback, useContext, useMemo, useState, useEffect } from 'react'
 import { CroquetRoot } from '@croquet/react'
 import { sessions } from '../data/sessions'
 
@@ -7,10 +7,9 @@ import RootModel from '../models/root'
 const SessionContext = createContext(null)
 
 export default function SessionManager({ children }) {
-  const [session, setSession] = useState({
-    name: sessions[0].name,
-    password: sessions[0].password,
-  })
+  const searchParams = new URLSearchParams(document.location.search)
+  const defaultSession = searchParams.get('session')
+  const [session, setSession] = useState(sessions.find((s) => s.name === defaultSession) || sessions[0])
   const { name, password } = session
 
   const changeSession = useCallback((newName: string, newPassword: string) => {
