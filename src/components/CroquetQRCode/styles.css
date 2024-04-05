@@ -1,7 +1,7 @@
 .croquet-qr-container {
-  position: fixed;
+  /* position: absolute;
   bottom: 0px;
-  left: 0px;
+  left: 0px; */
   margin: 0.5rem;
   background-color: white;
   border: 0.1rem solid black;

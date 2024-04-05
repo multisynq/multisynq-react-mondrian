@@ -73,7 +73,11 @@ export default function App() {
 
       <Colors {...{ selectedColor, set_selectedColor, resetPainting }} />
       <Painting {...{ paintingCells, onClick: paintCell }} />
-      {showQR && <CroquetQRCode />}
+      {showQR && (
+        <div className='qr-container'>
+          <CroquetQRCode />
+        </div>
+      )}
     </div>
   )
 }
