@@ -8,8 +8,6 @@ type CellProps = {
   id: number
 }
 export default function Painting({ paintingCells, onClick }: PaintingProps) {
-  const gapSize = 0.5
-
   function Cell({ grow = 1, id }: CellProps) {
     return (
       <div
@@ -27,9 +25,8 @@ export default function Painting({ paintingCells, onClick }: PaintingProps) {
       </div>
     )
   }
-  const size = 'calc(min(80vw, 50vh - 2rem))'
   return (
-    <div className='painting' style={{ width: size, height: size, backgroundColor: 'black' }}>
+    <div className='painting'>
       <Row>
         <Col grow={20}>
           <Row>

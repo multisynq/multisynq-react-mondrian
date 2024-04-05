@@ -11,15 +11,22 @@ body {
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  margin-top: 2rem;
 }
 
 .painting,
 .row,
 .col {
   display: flex;
-  gap: 2px;
+  gap: calc(min(0.025 * 80vw, 0.025 * (50vh - 2rem)));
   align-items: stretch;
   align-content: space-between;
+}
+
+.painting {
+  background-color: black;
+  width: calc(min(80vw, 50vh - 2rem));
+  height: calc(min(80vw, 50vh - 2rem));
 }
 
 .row {
@@ -92,45 +99,5 @@ body {
   }
   .color svg {
     padding: 0.5rem !important;
-  }
-}
-
-@media screen and (min-width: 10rem) {
-  .painting,
-  .row,
-  .col {
-    gap: 3px;
-  }
-}
-
-@media screen and (min-width: 20rem) {
-  .painting,
-  .row,
-  .col {
-    gap: 4px;
-  }
-}
-
-@media screen and (min-width: 30rem) {
-  .painting,
-  .row,
-  .col {
-    gap: 6px;
-  }
-}
-
-@media screen and (min-width: 40rem) {
-  .painting,
-  .row,
-  .col {
-    gap: 8px;
-  }
-}
-
-@media screen and (min-width: 50rem) {
-  .painting,
-  .row,
-  .col {
-    gap: 9px;
   }
 }
