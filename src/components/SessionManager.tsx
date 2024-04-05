@@ -13,7 +13,13 @@ export default function SessionManager({ children }) {
   const { name, password } = session
 
   const changeSession = useCallback((newName: string, newPassword: string) => {
-    setSession({ name: newName, password: newPassword })
+    const s = sessions.find((s) => s.name === newName)
+    if (s !== undefined) {
+      const searchParams = new URLSearchParams(window.location.search)
+      searchParams.set('session', s.name)
+      window.history.replaceState(null, '', `${window.location.pathname}?${searchParams.toString()}`)
+      setSession({ name: newName, password: newPassword })
+    }
   }, [])
 
   const contextValue = useMemo(
