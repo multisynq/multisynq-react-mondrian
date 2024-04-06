@@ -12,7 +12,7 @@ export default function CroquetQRCode() {
 
   const SIZE_BIG = 200
   const SIZE_SMALL = 75
-  const OPACITY_SMALL = 0.8
+  const OPACITY_SMALL = 0.3
   const OPACITY_BIG = 1
 
   const location = window.location.href

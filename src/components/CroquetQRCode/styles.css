@@ -1,7 +1,13 @@
+@media (max-width: 500px) {
+  .croquet-qr-container {
+    position: relative !important;
+  }
+}
+
 .croquet-qr-container {
-  /* position: absolute;
+  position: fixed;
   bottom: 0px;
-  left: 0px; */
+  left: 0px;
   margin: 0.5rem;
   background-color: white;
   border: 0.1rem solid black;
