@@ -95,11 +95,14 @@ body {
 
 select {
   font-size: 14pt;
-  padding: 0 2em;
+  padding: 0.2rem 1em;
   text-align: start;
   background-color: transparent;
-  border: none;
-  border-bottom: 2px solid #dddddd;
+  border: 0.075rem solid black;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  /* border: none; */
+  /* border-bottom: 2px solid #dddddd; */
 }
 
 @media screen and (min-width: 50rem) {
