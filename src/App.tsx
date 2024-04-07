@@ -13,6 +13,7 @@ import { useSessionManager } from './components/SessionManager'
 import CroquetQRCode from './components/CroquetQRCode'
 
 import { sessions } from './data/sessions'
+import { colors } from './data/paintingCells'
 
 export default function App() {
   // This allows to control which components are displayed in this demo
@@ -24,7 +25,7 @@ export default function App() {
   const model: RootModel = useModelRoot() as RootModel
   const [paintingCells, set_paintingCells] = useState(model.painting.cells)
   const [users, set_users] = useState(model.users)
-  const [selectedColor, set_selectedColor] = useState(null)
+  const [selectedColor, set_selectedColor] = useState(colors[0])
 
   const { sessionName, changeSession } = useSessionManager()
 

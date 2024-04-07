@@ -5,6 +5,8 @@ export const BLACK      = '#060700' // prettier-ignore
 export const PALE_GREY  = '#CBD2DA' // prettier-ignore
 export const LIGHT_GREY = '#E7E3DD' // prettier-ignore
 
+export const colors = [SCARLET, MACARONI, BLUE, BLACK, PALE_GREY, LIGHT_GREY]
+
 // prettier-ignore
 export const defaultPaintingCells = [
   { id: 0,  color: PALE_GREY  },
