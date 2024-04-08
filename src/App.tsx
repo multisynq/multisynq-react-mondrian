@@ -14,13 +14,24 @@ import CroquetQRCode from './components/CroquetQRCode'
 
 import { sessions } from './data/sessions'
 import { colors } from './data/paintingCells'
+import { tutorialConfig } from './data/tutorialConfig'
+
+function parseParams(params: URLSearchParams) {
+  const tutorial = params.get('tutorial')
+  if (tutorial !== undefined && tutorialConfig[tutorial] !== undefined) {
+    console.log(tutorial)
+    return tutorialConfig[tutorial]
+  }
+
+  const showQR = params.get('showQR') !== 'false'
+  const showUserCount = params.get('showUserCount') !== 'false'
+  const showSessionDropdown = params.get('showSessionDropdown') !== 'false'
+  return { showQR, showUserCount, showSessionDropdown }
+}
 
 export default function App() {
   // This allows to control which components are displayed in this demo
-  const searchParams = new URLSearchParams(document.location.search)
-  const showQR = searchParams.get('showQR') !== 'false'
-  const showUserCount = searchParams.get('showUserCount') !== 'false'
-  const showSessionDropdown = searchParams.get('showSessionDropdown') !== 'false'
+  const { showQR, showUserCount, showSessionDropdown } = parseParams(new URLSearchParams(document.location.search))
 
   const model: RootModel = useModelRoot() as RootModel
   const [paintingCells, set_paintingCells] = useState(model.painting.cells)
