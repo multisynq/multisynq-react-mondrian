@@ -23,10 +23,19 @@ body {
   align-content: space-between;
 }
 
+@media (min-aspect-ratio: 1/1) {
+  .painting {
+    width: calc(min(80vh, 60vw - 2rem)) !important;
+    height: calc(min(80vh, 60vw - 2rem)) !important;
+  }
+}
+
 .painting {
   background-color: black;
-  width: calc(min(80vw, 50vh - 2rem));
-  height: calc(min(80vw, 50vh - 2rem));
+  width: calc(min(80vw, 60vh - 2rem));
+  height: calc(min(80vw, 60vh - 2rem));
+  max-width: 500px !important;
+  max-height: 500px !important;
 }
 
 .row {
