@@ -1,13 +1,14 @@
 import "./styles.css";
 
 import { useState } from "react";
+import { useReactModelRoot } from "./bindings";
 
-import { useModel, PaintingModel } from "./models/painting";
+import { PaintingModel } from "./models/painting";
 import Colors from "./components/Colors";
 import Painting from "./components/Painting";
 
 export default function App() {
-  const { cells, paint, reset } = useModel<PaintingModel>();
+  const { cells, paint, reset } = useReactModelRoot<PaintingModel>();
 
   const [selectedColor, set_selectedColor] = useState(null);
 
