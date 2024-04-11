@@ -1,6 +1,8 @@
-.painting {
-  max-width: 40rem;
-  max-height: 40rem;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
 }
 
 .App {
@@ -9,26 +11,31 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  height: 100vh;
-  width: 100%;
+  margin-top: 2rem;
 }
 
-.cell {
-  width: 100%;
-  min-width: 1rem;
-  min-height: 1rem;
-  margin: 0;
-  padding: 0;
-  flex-grow: 1;
-}
-
+.painting,
 .row,
 .col {
   display: flex;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
+  gap: calc(min(0.025 * 80vw, 0.025 * (50vh - 2rem)));
   align-items: stretch;
-  align-content: stretch;
+  align-content: space-between;
+}
+
+@media (min-aspect-ratio: 1/1) {
+  .painting {
+    width: calc(min(80vh, 60vw - 2rem)) !important;
+    height: calc(min(80vh, 60vw - 2rem)) !important;
+  }
+}
+
+.painting {
+  background-color: black;
+  width: calc(min(80vw, 60vh - 2rem));
+  height: calc(min(80vw, 60vh - 2rem));
+  max-width: 500px !important;
+  max-height: 500px !important;
 }
 
 .row {
@@ -36,7 +43,6 @@
 }
 
 .col {
-  flex-grow: 1;
   flex-direction: column;
 }
 
@@ -54,7 +60,9 @@
 
 .colors {
   display: flex;
-  gap: 0.5rem;
+  gap: 2vw;
+  max-width: 35rem;
+  justify-content: center;
 }
 
 .color {
@@ -63,4 +71,54 @@
   outline: 0.1rem solid black;
   border-radius: 50%;
   cursor: pointer;
+  align-self: center;
+  min-width: 1rem;
+  min-height: 1rem;
+  max-width: 3rem;
+  max-height: 3rem;
+
+  svg {
+    padding: 1vw;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.user-count {
+  align-self: flex-end;
+  padding: 0.5rem;
+  background-color: gray;
+  color: white;
+  border-radius: 0.5rem 0 0 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-container {
+  display: flex;
+  width: 100%;
+  justify-content: start;
+}
+
+select {
+  font-size: 14pt;
+  padding: 0.2rem 1em;
+  text-align: start;
+  background-color: transparent;
+  border: 0.075rem solid black;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  /* border: none; */
+  /* border-bottom: 2px solid #dddddd; */
+}
+
+@media screen and (min-width: 50rem) {
+  .colors {
+    gap: 1rem;
+  }
+  .color svg {
+    padding: 0.5rem !important;
+  }
 }

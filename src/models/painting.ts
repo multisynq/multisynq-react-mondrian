@@ -21,16 +21,12 @@ export class PaintingModel extends ReactModel {
 
   reset() {
     this.cells = defaultPaintingCells;
-    this.publish(this.id, "paintingReset");
   }
 
   paint(data) {
     if (!data) return;
     const { cellId, newColor } = data;
-    this.cells = this.cells.map((cell) =>
-      cell.id === cellId ? { ...cell, color: newColor } : cell
-    );
-    this.publish(this.id, "cellPainted");
+    this.cells[cellId].color = newColor;
   }
 }
 PaintingModel.register("PaintingModel");

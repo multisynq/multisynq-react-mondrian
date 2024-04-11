@@ -3,25 +3,89 @@ import "./styles.css";
 import { useState } from "react";
 import { useReactModelRoot } from "./bindings";
 
-import { PaintingModel } from "./models/painting";
+import { BsPeopleFill } from 'react-icons/bs'
+
+import RootModel from './models/root'
+
+import Dropdown from './components/Dropdown'
+import CroquetQRCode from './components/CroquetQRCode'
 import Colors from "./components/Colors";
 import Painting from "./components/Painting";
+import { useSessionManager } from './components/SessionManager'
+
+import { sessions } from './data/sessions'
+import { colors } from './data/paintingCells'
+import { tutorialConfig } from './data/tutorialConfig'
+
+
+
+function parseParams(params: URLSearchParams) {
+  const tutorial = params.get('tutorial')
+  if (tutorial !== undefined && tutorialConfig[tutorial] !== undefined) {
+    return tutorialConfig[tutorial]
+  }
+
+  const showQR = params.get('showQR') !== 'false'
+  const showUserCount = params.get('showUserCount') !== 'false'
+  const showSessionDropdown = params.get('showSessionDropdown') !== 'false'
+  return { showQR, showUserCount, showSessionDropdown }
+}
 
 export default function App() {
-  const { cells, paint, reset } = useReactModelRoot<PaintingModel>();
+  // This allows to control which components are displayed in this demo
+  const { showQR, showUserCount, showSessionDropdown } = parseParams(new URLSearchParams(document.location.search))
 
-  const [selectedColor, set_selectedColor] = useState(null);
+  const model = useReactModelRoot<RootModel>();
 
-  const handleCellClick = (cellId) => {
-    if (selectedColor === null) return;
-    const payload = { cellId, newColor: selectedColor };
-    paint(payload);
-  };
+  const paintingCells = model.painting.cells
+  const users = model.users
+  const nUsers = users.size
   
+  const [selectedColor, set_selectedColor] = useState(colors[0])
+
+  const { sessionName, changeSession } = useSessionManager()
+
+  const resetPainting = model.painting.reset
+
+  const paintCell = (cellId) => {
+    if (selectedColor === null) return
+    const payload = { cellId, newColor: selectedColor }
+    model.painting.paint(payload)
+  }
+
+  const dropdownOptions = sessions.map((s) => ({ value: s, label: s.name }))
+  const selectedOption = sessions.findIndex((s) => s.name === sessionName)
+  const handleDropdownChange = (selectedIdx) => {
+    const s = sessions[selectedIdx]
+    changeSession(s.name, s.password)
+  }
+
   return (
-    <div className="App">
-      <Colors {...{ selectedColor, set_selectedColor, reset }} />
-      <Painting {...{ paintingCells: cells, onClick: handleCellClick }} />
+    <div className='App'>
+      {showSessionDropdown && (
+        <Dropdown
+          {...{
+            selected: selectedOption,
+            options: dropdownOptions,
+            onChange: handleDropdownChange,
+          }}
+        />
+      )}
+
+      {showUserCount && (
+        <div className='user-count'>
+          <BsPeopleFill />
+          <span>{nUsers}</span>
+        </div>
+      )}
+
+      <Colors {...{ selectedColor, set_selectedColor, resetPainting }} />
+      <Painting {...{ paintingCells, onClick: paintCell }} />
+      {showQR && (
+        <div className='qr-container'>
+          <CroquetQRCode />
+        </div>
+      )}
     </div>
-  );
+  )
 }
