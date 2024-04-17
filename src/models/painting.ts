@@ -1,8 +1,8 @@
-import { defaultPaintingCells } from "../data/paintingCells";
-import { ReactModel } from '../bindings';
+import { defaultPaintingCells } from '../data/paintingCells'
+import { ReactModel } from '../bindings'
 
-export class PaintingModel extends ReactModel {  
-  cells: { id: number; color: string }[];
+export class PaintingModel extends ReactModel {
+  cells: { id: number; color: string }[]
 
   init(options) {
     // super.init({
@@ -12,11 +12,11 @@ export class PaintingModel extends ReactModel {
     //     this.reset
     //   ]
     // })
-    super.init(options);
-    this.cells = defaultPaintingCells;
+    super.init(options)
+    this.reset()
 
-    this.subscribe(this.id, "paint", this.paint);
-    this.subscribe(this.id, "reset", this.reset);
+    this.subscribe(this.id, 'paint', this.paint)
+    this.subscribe(this.id, 'reset', this.reset)
   }
 
   reset() {
@@ -24,9 +24,9 @@ export class PaintingModel extends ReactModel {
   }
 
   paint(data) {
-    if (!data) return;
-    const { cellId, newColor } = data;
-    this.cells[cellId].color = newColor;
+    if (!data) return
+    const { cellId, newColor } = data
+    this.cells[cellId].color = newColor
   }
 }
-PaintingModel.register("PaintingModel");
+PaintingModel.register('PaintingModel')

@@ -12,7 +12,7 @@ export default function Colors({ selectedColor, set_selectedColor, resetPainting
           backgroundColor: color,
           border: color === selectedColor ? '2px solid black' : '2px solid white',
           width: `${size}vw`,
-          height: `${size}vw`
+          height: `${size}vw`,
         }}
         onClick={() => set_selectedColor(color)}
       />
@@ -21,12 +21,13 @@ export default function Colors({ selectedColor, set_selectedColor, resetPainting
 
   return (
     <div className='colors'>
-
-      <div {...{
-        className: 'color d-flex align-items-center justify-content-center',
-        style: { width: `${size}vw`, height: `${size}vw` },
-        onClick: (e) => resetPainting()
-      }}>
+      <div
+        {...{
+          className: 'color d-flex align-items-center justify-content-center',
+          style: { width: `${size}vw`, height: `${size}vw` },
+          onClick: (e) => resetPainting(),
+        }}
+      >
         <IoIosRefresh />
       </div>
 

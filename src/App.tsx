@@ -1,7 +1,7 @@
-import "./styles.css";
+import './styles.css'
 
-import { useState } from "react";
-import { useReactModelRoot } from "./bindings";
+import { useState } from 'react'
+import { useReactModelRoot } from './bindings'
 
 import { BsPeopleFill } from 'react-icons/bs'
 
@@ -9,15 +9,13 @@ import RootModel from './models/root'
 
 import Dropdown from './components/Dropdown'
 import CroquetQRCode from './components/CroquetQRCode'
-import Colors from "./components/Colors";
-import Painting from "./components/Painting";
+import Colors from './components/Colors'
+import Painting from './components/Painting'
 import { useSessionManager } from './components/SessionManager'
 
 import { sessions } from './data/sessions'
 import { colors } from './data/paintingCells'
 import { tutorialConfig } from './data/tutorialConfig'
-
-
 
 function parseParams(params: URLSearchParams) {
   const tutorial = params.get('tutorial')
@@ -35,12 +33,12 @@ export default function App() {
   // This allows to control which components are displayed in this demo
   const { showQR, showUserCount, showSessionDropdown } = parseParams(new URLSearchParams(document.location.search))
 
-  const model = useReactModelRoot<RootModel>();
+  const model = useReactModelRoot<RootModel>()
 
   const paintingCells = model.painting.cells
   const users = model.users
   const nUsers = users.size
-  
+
   const [selectedColor, set_selectedColor] = useState(colors[0])
 
   const { sessionName, changeSession } = useSessionManager()
