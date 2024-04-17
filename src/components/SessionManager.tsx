@@ -32,7 +32,6 @@ export default function SessionManager({ children }) {
 
   return (
     <CroquetRoot
-      key={Math.random()}
       sessionParams={{
         model: RootModel,
         appId: import.meta.env['VITE_CROQUET_APP_ID'],
