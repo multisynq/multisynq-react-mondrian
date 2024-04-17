@@ -20,7 +20,9 @@ export class PaintingModel extends ReactModel {
   }
 
   reset() {
-    this.cells = defaultPaintingCells;
+    // Creating a clone to avoid mutating the default cells
+    // when changing the painting color
+    this.cells = structuredClone(defaultPaintingCells)
   }
 
   paint(data) {
