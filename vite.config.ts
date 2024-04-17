@@ -1,16 +1,8 @@
-import { defineConfig, Plugin } from 'vite'
+import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-const fullReloadAlways: Plugin = {
-  name: 'full-reload',
-  handleHotUpdate({ server }) {
-    server.ws.send({ type: 'full-reload' })
-    return []
-  },
-}
-
 export default defineConfig({
-  plugins: [react(), fullReloadAlways],
+  plugins: [react()],
   base: './',
   build: {
     minify: false,
