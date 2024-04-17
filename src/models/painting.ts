@@ -1,5 +1,5 @@
 import { defaultPaintingCells } from '../data/paintingCells'
-import { ReactModel } from '../bindings'
+import { ReactModel } from '@croquet/react'
 
 export class PaintingModel extends ReactModel {
   cells: { id: number; color: string }[]

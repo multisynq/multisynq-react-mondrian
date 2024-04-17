@@ -1,4 +1,4 @@
-import { ReactModel } from '../bindings'
+import { ReactModel } from '@croquet/react'
 import { PaintingModel } from './painting'
 
 class RootModel extends ReactModel {

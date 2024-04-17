@@ -1,7 +1,7 @@
 import './styles.css'
 
 import { useState } from 'react'
-import { useReactModelRoot } from './bindings'
+import { useReactModelRoot } from '@croquet/react'
 
 import { BsPeopleFill } from 'react-icons/bs'
 

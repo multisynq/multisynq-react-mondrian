@@ -1,5 +1,5 @@
-import { createContext, useCallback, useContext, useMemo, useState, useEffect } from 'react'
-import { CroquetRoot } from '../bindings'
+import { createContext, useCallback, useContext, useMemo, useState } from 'react'
+import { CroquetRoot } from '@croquet/react'
 import { sessions } from '../data/sessions'
 
 import RootModel from '../models/root'
