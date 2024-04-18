@@ -6,8 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "vite --host",
-    "dev": "vite",
-    "dev-lan": "vite --host",
+    "dev": "vite --host",
     "build": "vite build",
     "clean": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + && rm -f package-lock.json",
     "lines_of_code": "cloc --exclude-dir=node_modules --not-match-f='.*\\.(svg|md|toml)' ."
