@@ -46,6 +46,11 @@ export default function Mondrian({ showQR = true, showUserCount = true, showSess
   const handleDropdownChange = (selectedIdx) => {
     const s = sessions[selectedIdx]
     changeSession({ name: s.name, password: s.password })
+
+    // Update URL session
+    const searchParams = new URLSearchParams(window.location.search)
+    searchParams.set('session', s.name)
+    window.history.replaceState(null, '', `${window.location.pathname}?${searchParams.toString()}`)
   }
 
   return (
