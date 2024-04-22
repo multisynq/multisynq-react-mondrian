@@ -1,7 +1,12 @@
 import './styles.css'
 
 import { useState } from 'react'
-import { useReactModelRoot, useChangeSession, useCroquetSession } from '@croquet/react'
+import {
+  useReactModelRoot,
+  useChangeSession,
+  useCroquetSession,
+  useConnectedViews,
+} from '@croquet/react' //prettier-ignore
 
 import { BsPeopleFill } from 'react-icons/bs'
 
@@ -25,8 +30,7 @@ export default function Mondrian({ showQR = true, showUserCount = true, showSess
   const model = useReactModelRoot<RootModel>()
 
   const paintingCells = model.painting.cells
-  const users = model.users
-  const nUsers = users.size
+  const { viewCount: nUsers } = useConnectedViews()
 
   const [selectedColor, set_selectedColor] = useState(colors[0])
 

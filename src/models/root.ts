@@ -3,24 +3,17 @@ import { PaintingModel } from './painting'
 
 class RootModel extends ReactModel {
   painting: PaintingModel
-  users: Set<string>
 
   init(options) {
     super.init(options)
     this.painting = PaintingModel.create(options)
-
-    this.users = new Set()
-    this.subscribe(this.sessionId, 'view-join', this.userJoined)
-    this.subscribe(this.sessionId, 'view-exit', this.userLeft)
   }
 
-  userJoined(viewId) {
-    this.users.add(viewId)
-    this.publish(this.id, 'userJoined', viewId)
+  handleViewJoin(viewId) {
+    console.log('view joined', viewId)
   }
-  userLeft(viewId) {
-    this.users.delete(viewId)
-    this.publish(this.id, 'userLeft', viewId)
+  handleViewExit(viewId) {
+    console.log('view exited', viewId)
   }
 }
 

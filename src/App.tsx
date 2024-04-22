@@ -52,6 +52,9 @@ export default function App() {
         apiKey: import.meta.env['VITE_CROQUET_API_KEY'],
         name,
         password,
+        options: {
+          trackViews: true,
+        },
       }}
     >
       <Mondrian {...{ showQR, showUserCount, showSessionDropdown }} />
