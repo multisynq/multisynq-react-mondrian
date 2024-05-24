@@ -12,7 +12,7 @@
     "lines_of_code": "cloc --exclude-dir=node_modules --not-match-f='.*\\.(svg|md|toml)' ."
   },
   "dependencies": {
-    "@croquet/react": "^1.4.4",
+    "@croquet/react": "^2.0.0",
     "@uidotdev/usehooks": "^2.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
