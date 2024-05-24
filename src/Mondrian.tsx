@@ -26,7 +26,6 @@ type MondrianProps = {
   showSessionDropdown: boolean
 }
 export default function Mondrian({ showQR = true, showUserCount = true, showSessionDropdown = true }: MondrianProps) {
-  // This allows to control which components are displayed in this demo
   const model = useReactModelRoot<RootModel>()
 
   const paintingCells = model.painting.cells
