@@ -1,14 +1,14 @@
-# react-croquet-mondrian
+# react-multisynq-mondrian
 
-Example for Croquet's React bindings.
+Example for Multisynq's React bindings.
 
 ## Run it Locally
 
-To run this example, first update .env.local with your Croquet development key obtained from [croquet.io/keys](https://croquet.io/keys). Then have bun ready and run following commands:
+To run this example, first update .env.local with your Multisynq development key obtained from [multisynq.io/coder](https://multisynq.io/coder). Then have bun ready and run following commands:
 
     bun i
     npm run dev
 
 ## Documentation
 
-[This tutorial](https://croquet.io/dev/docs/croquet-react/tutorial-3_React_Mondrian.html) explains how to build this demo.
+[This tutorial](https://multisynq.io/docs/multisynq-react/tutorial-3_React_Mondrian.html) explains how to build this demo.

@@ -1,6 +1,6 @@
 import './styles.css'
 
-import { CroquetRoot } from '@croquet/react'
+import { MultisynqRoot } from '@multisynq/react'
 
 import { sessions } from './data/sessions'
 import { tutorialConfig } from './data/tutorialConfig'
@@ -45,11 +45,11 @@ export default function App() {
   const { name, password } = defaultSession
 
   return (
-    <CroquetRoot
+    <MultisynqRoot
       sessionParams={{
         model: RootModel,
-        appId: import.meta.env['VITE_CROQUET_APP_ID'],
-        apiKey: import.meta.env['VITE_CROQUET_API_KEY'],
+        appId: import.meta.env['VITE_MULTISYNQ_APP_ID'],
+        apiKey: import.meta.env['VITE_MULTISYNQ_API_KEY'],
         name,
         password,
         options: {
@@ -58,6 +58,6 @@ export default function App() {
       }}
     >
       <Mondrian {...{ showQR, showUserCount, showSessionDropdown }} />
-    </CroquetRoot>
+    </MultisynqRoot>
   )
 }

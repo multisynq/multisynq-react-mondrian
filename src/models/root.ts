@@ -1,4 +1,4 @@
-import { ReactModel } from '@croquet/react'
+import { ReactModel } from '@multisynq/react'
 import { PaintingModel } from './painting'
 
 class RootModel extends ReactModel {

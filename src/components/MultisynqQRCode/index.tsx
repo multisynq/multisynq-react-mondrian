@@ -5,7 +5,7 @@ import { BsPin, BsPinFill } from 'react-icons/bs'
 import { LuClipboardCheck, LuClipboardList } from 'react-icons/lu'
 import './styles.css'
 
-export default function CroquetQRCode() {
+export default function MultisynqQRCode() {
   const [isPinned, setIsPinned] = useState(false)
   const [copyIcon, setCopyIcon] = useState(<LuClipboardList />)
   const [ref, hovering] = useHover()
@@ -31,7 +31,7 @@ export default function CroquetQRCode() {
   return (
     <div
       ref={ref}
-      className='croquet-qr-container'
+      className='multisynq-qr-container'
       style={{
         padding: isExpanded ? '' : `calc(${SIZE_SMALL}px / 10)`,
         borderWidth: isExpanded ? '0.2rem' : `calc(${SIZE_SMALL}px / 30)`,

@@ -3,17 +3,17 @@ import './styles.css'
 import { useState } from 'react'
 import {
   useReactModelRoot,
-  useChangeSession,
-  useCroquetSession,
+  useSetSession,
+  useMultisynqSession,
   useConnectedViews,
-} from '@croquet/react' //prettier-ignore
+} from '@multisynq/react' //prettier-ignore
 
 import { BsPeopleFill } from 'react-icons/bs'
 
 import RootModel from './models/root'
 
 import Dropdown from './components/Dropdown'
-import CroquetQRCode from './components/CroquetQRCode'
+import MultisynqQRCode from './components/MultisynqQRCode'
 import Colors from './components/Colors'
 import Painting from './components/Painting'
 
@@ -33,8 +33,8 @@ export default function Mondrian({ showQR = true, showUserCount = true, showSess
 
   const [selectedColor, set_selectedColor] = useState(colors[0])
 
-  const changeSession = useChangeSession()
-  const { name: sessionName } = useCroquetSession()
+  const changeSession = useSetSession()
+  const { name: sessionName } = useMultisynqSession()
 
   const resetPainting = model.painting.reset
 
@@ -79,7 +79,7 @@ export default function Mondrian({ showQR = true, showUserCount = true, showSess
       <Painting {...{ paintingCells, onClick: paintCell }} />
       {showQR && (
         <div className='qr-container'>
-          <CroquetQRCode />
+          <MultisynqQRCode />
         </div>
       )}
     </div>
